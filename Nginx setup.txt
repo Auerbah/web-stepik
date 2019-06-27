@@ -1,0 +1,20 @@
+0) Каталог web копируется в /home/box
+
+1) Установка:
+sudo apt-get install nginx
+
+2) Запуск:
+sudo /etc/init.d/nginx start
+
+3) Перезагрузка:
+nginx -s reload
+
+4) Просмотров логов:
+cat /var/log/nginx/access.log
+cat /var/log/nginx/error.log
+
+5) Создание символической ссылки:
+sudo ln -s /home/box/web/etc/nginx.config /etc/nginx/sites-enabled/
+
+6) Проверка
+cat /etc/nginx/sites-enabled/nginx.config
