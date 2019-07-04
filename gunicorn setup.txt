@@ -1,0 +1,14 @@
+1) Создаем виртуальное окружение:
+virtualenv venv
+
+2) Активируем его:
+source /venv/bin/activate
+
+3) Устанавливаем gunicorn:
+pip install gunicorn
+
+4) Нужно перейти в папку web, иначе не получится следующим шагом запустить wsgi-приложение
+cd /home/box/web
+
+5) Запускаем приложение
+gunicorn /home/box/web/etc/hello.py hello:app
