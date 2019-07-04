@@ -10,5 +10,19 @@ pip install gunicorn
 4) Нужно перейти в папку web, иначе не получится следующим шагом запустить wsgi-приложение
 cd /home/box/web
 
-5) Запускаем приложение
+5) Запускаем приложение hello.py
 gunicorn /home/box/web/etc/hello.py hello:app
+или так
+gunicorn --bind 0.0.0.0:8080 hello:app
+
+6) Переходим в папку cd ask
+cd /home/box/web/ask
+
+7) Запускаем wsgi-приложение django
+gunicorn -c /home/box/web/etc/ask.py ask.wsgi
+
+8) Чтобы запустить одновременно 2 приложения используем init.sh. Переходим в папку web
+cd/ home/box/web
+
+9) Запускаем:
+./init.sh
