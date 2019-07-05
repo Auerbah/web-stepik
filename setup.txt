@@ -1,0 +1,27 @@
+git clone https://github.com/Auerbah/web-stepik
+mv web-stepik/web ~/
+
+Устанавливаем django нужной версии, иначе проект не будет запускаться
+sudo pip3 install Django==2.0
+
+возможно процесс не будет зааершаться, тогда нужно прервать процесс и проверить установился ли django версии 2.0,
+если нет, то еще раз эту команду повторить
+
+Проверим запускается ли приложение
+cd web/ask
+python3 manage.py runserver
+
+Создаетм ссылку конфига nginx и запускаем его
+sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
+sudo sudo /etc/init.d/nginx start
+
+Запускаем приложения
+cd /home/box/web
+gunicorn -c /home/box/web/etc/hello.py hello:app &
+
+cd /home/box/web/ask
+gunicorn -c /home/box/web/etc/ask.py ask.wsgi &
+
+Проверяем что работает
+curl http://127.0.0.1/hello/?a=bcd

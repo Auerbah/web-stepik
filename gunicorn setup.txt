@@ -11,7 +11,7 @@ pip install gunicorn
 cd /home/box/web
 
 5) Запускаем приложение hello.py
-gunicorn /home/box/web/etc/hello.py hello:app
+gunicorn -с /home/box/web/etc/hello.py hello:app
 или так
 gunicorn --bind 0.0.0.0:8080 hello:app
 

@@ -6,6 +6,12 @@ sudo apt-get install nginx
 2) Запуск:
 sudo /etc/init.d/nginx start
 
+Убедиться в том что нет файла с дефолтной конфигурацией:
+cat /etc/nginx/sites-enabled/default
+
+Если он есть, то нужно его удалить
+sudo rm /etc/nginx/sites-enabled/default
+
 3) Перезагрузка:
 sudo nginx -s reload
 
