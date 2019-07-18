@@ -1,4 +1,4 @@
-git clone https://github.com/Auerbah/web-stepik
+﻿git clone https://github.com/Auerbah/web-stepik
 mv web-stepik/web ~/
 
 Устанавливаем django нужной версии, иначе проект не будет запускаться
@@ -14,7 +14,7 @@ python3 manage.py runserver
 Создаетм ссылку конфига nginx и запускаем его
 sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
-sudo sudo /etc/init.d/nginx start
+sudo /etc/init.d/nginx start
 
 Запускаем приложения
 cd /home/box/web
@@ -25,3 +25,4 @@ gunicorn -c /home/box/web/etc/ask.py ask.wsgi &
 
 Проверяем что работает
 curl http://127.0.0.1/hello/?a=bcd
+curl http://127.0.0.1/login/
