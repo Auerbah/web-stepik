@@ -40,7 +40,7 @@
 #### Создаетм ссылку конфига nginx и запускаем его
     sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/
     sudo rm /etc/nginx/sites-enabled/default
-    sudo sudo /etc/init.d/nginx start
+    sudo /etc/init.d/nginx start
 
 #### Запускаем приложения
     cd /home/box/web
