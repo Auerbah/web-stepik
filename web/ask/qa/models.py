@@ -41,3 +41,11 @@ class Post(models.Model):
     class Meta:
         db_table = 'blogposts'
     #     ordering = ['-creation_date']
+
+
+class Tag(models.Model):
+    title = models.CharField(max_length=255)
+    posts = models.ManyToManyField(Post)
+
+    def __unicode__(self):
+        return self.title
