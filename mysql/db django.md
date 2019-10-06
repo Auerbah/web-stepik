@@ -1,5 +1,5 @@
 ﻿Настроим проект, чтобы посылать запросы к базе данных через python, используя окружение проекта
-```
+```python
 'mysql': {
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'database_db',
@@ -44,7 +44,7 @@ $ python manage.py shell
 Дальше будем использовать dajngo ORM для работы с базой данных
 
 В models.py создадим новый класс:
-``` 
+```python
 class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
@@ -86,7 +86,7 @@ $ python manage.py migrate --database=mysql
 Нужно сделать mysql базу данных как default в settings.py 
 
 Добавим несколько строк в БД через терминал (см как подключить через терминал в пред. статье)
-``` 
-mysql> INSERT INTO blogposts VALUES (NULL, 'title', 'content1', '1000-10-01');
-mysql> INSERT INTO blogposts VALUES (NULL, 'title', 'content1', '1000-10-01 23:59:59');
+```mysql
+INSERT INTO blogposts VALUES (NULL, 'title', 'content1', '1000-10-01');
+INSERT INTO blogposts VALUES (NULL, 'title', 'content1', '1000-10-01 23:59:59');
 ```
