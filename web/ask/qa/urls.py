@@ -14,4 +14,5 @@ urlpatterns = [
     path('new/', views.test, name='new'),
     path('post/<int:id>', views.post_details, name='post-details'),
     path('tag/<int:id>', views.tag_details, name='tag-details'),
+    path('all_tags/', views.all_tags, name='all-tags'),
 ]

@@ -51,5 +51,5 @@ class Tag(models.Model):
     title = models.CharField(max_length=255)
     posts = models.ManyToManyField(Post)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
