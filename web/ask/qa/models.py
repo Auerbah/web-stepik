@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.db import models
 
 
@@ -32,11 +33,14 @@ class Post(models.Model):
     content = models.TextField()
     creation_date = models.DateTimeField(blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return 'post/%d/' % self.pk
+
+    def get_url(self):
+        return reverse('qa:post-details', kwargs={'id': self.pk})
 
     class Meta:
         db_table = 'blogposts'

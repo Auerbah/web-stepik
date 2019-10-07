@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{tag.title}}</title>
+</head>
+<body>
+<h1>{{tag.title}}</h1>
+{% for post in tag.posts.all %}
+    <a href="{{ post.get_url }}">{{ post }}</a><br>
+{% endfor %}
+</body>
+</html>
