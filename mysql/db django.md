@@ -90,3 +90,8 @@ $ python manage.py migrate --database=mysql
 INSERT INTO blogposts VALUES (NULL, 'title', 'content1', '1000-10-01');
 INSERT INTO blogposts VALUES (NULL, 'title', 'content1', '1000-10-01 23:59:59');
 ```
+
+Обновим значение заголовка второго поста 
+```mysql
+UPDATE blogposts SET title = 'title 2' WHERE id=2;
+```
