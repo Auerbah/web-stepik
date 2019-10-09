@@ -8,7 +8,7 @@
 <h1>{{question.title}}</h1>
 <p><b>{{question.text}}</b></p>
 {% for answer in question.answer_set.all %}
-    <p>answer.title</p>
+    <p>{{answer.text}}</p>
 {% endfor %}
 </body>
 </html>
