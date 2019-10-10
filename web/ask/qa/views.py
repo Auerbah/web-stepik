@@ -1,4 +1,4 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Tag, Question
@@ -6,6 +6,14 @@ from .models import Post, Tag, Question
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
+
+
+def redirect(request):
+    return HttpResponseRedirect('/redirected/')
+
+
+def redirected(request):
+    return render(request, 'qa/redirected.html')
 
 
 def all_posts(request):
