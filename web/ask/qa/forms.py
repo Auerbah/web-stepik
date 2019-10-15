@@ -9,7 +9,7 @@ class FeedBackForm(forms.Form):
 
     def clean(self):
         if FeedBackForm.is_spam(self.cleaned_data):
-            raise forms.ValidationError(u'Сообщение похоже на спам', code='spam')
+            raise forms.ValidationError(u'Spam', code='spam')
 
     @staticmethod
     def is_spam(data):
@@ -23,7 +23,7 @@ class AddPostForm(forms.Form):
     # def clean_message(self):
     #     message = self.cleaned_data['message']
     #     if not is_ethic(message):
-    #         raise forms.ValidationError(u'Сообщение не корректно', code=12)
+    #         raise forms.ValidationError(u'Not correct', code=12)
     #     return message + "\nThank you for your attention."
 
     def save(self):
@@ -59,6 +59,10 @@ class AnswerForm(forms.Form):
             super(AnswerForm, self).__init__()
         else:
             super(AnswerForm, self).__init__(data)
+
+    def clean(self):
+        self.cleaned_data['question'] = self._question_id
+        return self.cleaned_data
 
     def save(self):
         data = self.cleaned_data

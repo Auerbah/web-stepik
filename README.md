@@ -50,7 +50,7 @@ nano web/ask/ask/settings.py
 Накатить таблицы в эту базу данных:
 ```
 cd web/ask
-python3 manage.py makemigrations
+# python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 Проверить что есть таблицы
@@ -83,4 +83,14 @@ gunicorn -c /home/box/web/etc/ask.py ask.wsgi &
 ```
 curl http://127.0.0.1/hello/?a=bcd
 curl http://127.0.0.1/login/
+```
+Чтобы перезагрузить сервер нужно выполнить:
+```
+sudo reload gunicorn
+```
+Или так:
+```
+fg 2
+Ctrl+C
+gunicorn -c /home/box/web/etc/ask.py ask.wsgi &
 ```
