@@ -1,10 +1,17 @@
-from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+
+from .forms import FeedBackForm, AddPostForm, AskForm, AnswerForm
 from .models import Post, Tag, Question
 
 
 def test(request, *args, **kwargs):
+    try:
+        print(request.GET.get('id'))
+    except:
+        pass
     return HttpResponse('OK')
 
 
@@ -13,6 +20,7 @@ def redirect(request):
 
 
 def redirected(request):
+    # return HttpResponseRedirect('/r/')
     return render(request, 'qa/redirected.html')
 
 
@@ -53,7 +61,7 @@ def all_tags(request):
         page = paginator.page(paginator.num_pages)
 
     paginator.baseurl = '?page='
-    
+
     return render(request, 'qa/all_tags.html', {
         'tags': page.object_list,
         'paginator': paginator,
@@ -90,9 +98,26 @@ def new_questions(request):
 
 def question_details(request, id):
     question = get_object_or_404(Question, id=id)
-    return render(request, 'qa/question_details.html', {
-        'question': question,
-    })
+
+    if request.method == "POST":
+        print(request.POST)
+        form = AnswerForm(question.id, request.POST)
+        if form.is_valid():
+            print("saved")
+            form.save()
+            return HttpResponseRedirect(question.get_url())
+        print("not valid")
+        return render(request, 'qa/question_details.html', {
+            'question': question,
+            'form': form
+        })
+    else:
+
+        form = AnswerForm(question.id)
+        return render(request, 'qa/question_details.html', {
+            'question': question,
+            'form': form
+        })
 
 
 def popular_questions(request):
@@ -120,3 +145,40 @@ def popular_questions(request):
         'paginator': paginator,
         'page': page,
     })
+
+
+def feedback(request):
+    if request.method == "POST":
+        form = FeedBackForm(request.POST)
+        if form.is_valid():
+            HttpResponseRedirect('/feedback/')
+    else:
+        form = FeedBackForm()
+    return render(request, 'qa/feedback.html', {'form': form})
+
+
+@csrf_exempt
+def add_post(request):
+    if request.method == "POST":
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            url = post.get_url()
+            return HttpResponseRedirect(url)
+
+    else:
+        form = AddPostForm()
+    return render(request, 'qa/add_post.html', {'form': form})
+
+
+def ask(request):
+    if request.method == "POST":
+        form = AskForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            url = question.get_url()
+            return HttpResponseRedirect(url)
+
+    else:
+        form = AskForm()
+    return render(request, 'qa/ask.html', {'form': form})

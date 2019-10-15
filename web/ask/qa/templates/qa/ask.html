@@ -2,21 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{question.title}}</title>
+    <title>Add new post</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<h1>{{question.title}}</h1>
-<p><b>{{question.text}}</b></p>
-{% for answer in question.answer_set.all %}
-<p>{{answer.text}}</p>
-{% endfor %}
-
 {% for e in form.non_fields_errors %}
 <div class="alert alert_danger">{{ e }}</div>
 {% endfor %}
-<form class="from-horizontal" method="post" action="{{ question.get_url }}">
+<form class="from-horizontal" method="post" action="/ask/">
     {% csrf_token %}
     <fieldset>
         {% for field in form %}
@@ -30,7 +24,5 @@
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </div>
 </form>
-
-
 </body>
 </html>

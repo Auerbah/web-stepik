@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+{% for e in form.non_fields_errors %}
+    <div class="alert alert_danger">{{ e }}</div>
+{% endfor %}
+<form class="from-horizontal" method="post" action="/qa/add/">
+    <fieldset>
+        {% for field in form %}
+        {%  %}
+        {%  %}
+    </fieldset>
+
+</form>
+
+{%  %}
+</body>
+</html>
