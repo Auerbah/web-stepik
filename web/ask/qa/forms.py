@@ -53,7 +53,7 @@ class AnswerForm(forms.Form):
     text = forms.CharField(max_length=100)
     question = forms.IntegerField()
 
-    def __init__(self, question_id, data=None):
+    def __init__(self, question_id=None, data=None):
         self._question_id = question_id
         if data is None:
             super(AnswerForm, self).__init__()
