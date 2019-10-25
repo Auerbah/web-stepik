@@ -9,8 +9,8 @@ urlpatterns = [
     path('', views.new_questions, name='new-questions'),
     path('r/', views.redirect, name='redirect'),
     path('redirected/', views.redirected, name='redirected'),
-    path('login/', views.test, name='login'),
-    path('signup/', views.test, name='signup'),
+    path('login/', views.login_view, name='login'),
+    path('signup/', views.signup, name='signup'),
     path('question/<int:id>/', views.question_details, name='question-details'),
     path('ask/', views.ask, name='ask'),
     path('popular/', views.popular_questions, name='popular-questions'),
@@ -21,4 +21,5 @@ urlpatterns = [
     path('all_tags/', views.all_tags, name='all-tags'),
     path('feedback/', views.feedback, name='feedback'),
     path('test/', views.test, name='test'),
+    path('cookies/', views.cookies, name='cookies'),
 ]

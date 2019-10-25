@@ -1,6 +1,9 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import Post, Question, Answer
 from django.utils import timezone
+from datetime import datetime, timedelta
+import hashlib
 
 
 class FeedBackForm(forms.Form):
@@ -38,12 +41,9 @@ class AskForm(forms.Form):
     title = forms.CharField(max_length=100)
     text = forms.CharField(widget=forms.Textarea)
 
-    # def clean(self):
-    #     return self.cleaned_data
-
     def save(self):
         data = self.cleaned_data
-        data['author_id'] = 1
+        data['author_id'] = self._user.pk
         question = Question(**data)
         question.save()
         return question
@@ -72,3 +72,28 @@ class AnswerForm(forms.Form):
         answer = Answer(text=text, author_id=author_id, question_id=question_id)
         answer.save()
         return answer
+
+
+class SignupForm(forms.Form):
+    username = forms.CharField(max_length=150)
+    email = forms.EmailField(max_length=100)
+    password = forms.CharField(max_length=128, widget=forms.PasswordInput())
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+
+        if User.objects.filter(username=username).exists():
+            print('Username "%s" is already exists' % username)
+            raise forms.ValidationError('Username "%s" is already exists' % username)
+        return username
+
+    def save(self):
+        data = self.cleaned_data
+        user = User.objects.create_user(**data)
+        user.save()
+        return user
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=150)
+    password = forms.CharField(max_length=128, widget=forms.PasswordInput())

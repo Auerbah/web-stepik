@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert_danger">{{ error | escape }}</div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert_danger">{{ error }}</div>
+    {% endfor %}
+{% endif %}
+<form class="from-horizontal" method="post" action="/login/">
+    {% csrf_token %}
+    <fieldset>
+        {% for field in form %}
+        <div class="control-group {% if field.errors %}has-error{% endif %}">
+            <label class="control-label">{{ field.label }}</label>
+            <div class="controls">{{ field }}</div>
+        </div>
+        {% endfor %}
+    </fieldset>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+</form>
+</body>
+</html>
