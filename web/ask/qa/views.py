@@ -107,13 +107,13 @@ def new_questions(request):
     })
 
 
-@login_required
+# @login_required
 def question_details(request, id):
     question = get_object_or_404(Question, id=id)
 
-    if request.method == "POST":
-        print(request.POST)
+    if request.user.is_authenticated and request.method == "POST":
         form = AnswerForm(question.id, request.POST)
+
         if form.is_valid():
             print("saved")
             form.save()
@@ -183,11 +183,11 @@ def add_post(request):
     return render(request, 'qa/add_post.html', {'form': form})
 
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def ask(request):
     if request.method == "POST":
         form = AskForm(request.POST)
-        if form.is_valid():
+        if request.user.is_authenticated and form.is_valid():
             form._user = request.user
             question = form.save()
             url = question.get_url()
